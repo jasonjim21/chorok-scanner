@@ -35,17 +35,34 @@ export default function Scanner() {
     return sentences.filter((_, i) => selected[i]).join("\n");
   };
 
+  const compressImage = (dataUrl: string, maxWidth = 1600): Promise<string> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        const scale = Math.min(1, maxWidth / img.width);
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        const ctx = canvas.getContext("2d")!;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", 0.8));
+      };
+      img.src = dataUrl;
+    });
+  };
+
   const handleCapture = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = (e.target as HTMLInputElement).files?.[0];
     if (!file) return;
 
     const reader = new FileReader();
     reader.onload = async (event) => {
-      const base64Full = event.target?.result as string;
-      const base64Data = base64Full.split(",")[1];
-      const mediaType = file.type || "image/jpeg";
+      const originalDataUrl = event.target?.result as string;
+      const compressed = await compressImage(originalDataUrl);
+      const base64Data = compressed.split(",")[1];
+      const mediaType = "image/jpeg";
 
-      setCapturedImage(base64Full);
+      setCapturedImage(compressed);
       setAppState(STATES.PROCESSING);
       setError(null);
 
