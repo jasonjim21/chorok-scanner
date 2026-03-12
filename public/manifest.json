@@ -1,0 +1,22 @@
+{
+  "name": "초록 스캐너",
+  "short_name": "초록",
+  "description": "책 속 좋은 문장을 스캔해서 기록하세요",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f1a0e",
+  "theme_color": "#0f1a0e",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
