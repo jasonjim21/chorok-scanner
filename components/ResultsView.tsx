@@ -57,8 +57,6 @@ export default function ResultsView({
           style={{
             color: "#00e600",
             fontSize: 13,
-            fontFamily: "'Noto Sans KR', sans-serif",
-            letterSpacing: "0.05em",
           }}
         >
           {sentences.length}개의 문장을 찾았어요
@@ -70,10 +68,8 @@ export default function ResultsView({
             border: "none",
             color: "#888",
             fontSize: 13,
-            fontFamily: "'Noto Sans KR', sans-serif",
             cursor: "pointer",
             padding: "4px 8px",
-            letterSpacing: "0.02em",
           }}
         >
           {allSelected ? "전체 해제" : "전체 선택"}

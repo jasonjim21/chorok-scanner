@@ -107,9 +107,7 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
               justifyContent: "center",
             }}
           >
-            <p style={{ color: "#444", fontSize: 13, fontFamily: "'Noto Sans KR', sans-serif" }}>
-              카메라 준비 중...
-            </p>
+            <p style={{ color: "#444", fontSize: 13 }}>카메라 준비 중...</p>
           </div>
         )}
 
@@ -126,21 +124,15 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
               padding: 24,
             }}
           >
-            <p style={{ color: "#c47a6a", fontSize: 14, fontFamily: "'Noto Sans KR', sans-serif", textAlign: "center" }}>
-              {cameraError}
-            </p>
-            <p style={{ color: "#555", fontSize: 12, fontFamily: "'Noto Sans KR', sans-serif", textAlign: "center" }}>
-              갤러리에서 사진을 선택해주세요.
-            </p>
+            <p style={{ color: "#c47a6a", fontSize: 14, textAlign: "center" }}>{cameraError}</p>
+            <p style={{ color: "#555", fontSize: 12, textAlign: "center" }}>갤러리에서 사진을 선택해주세요.</p>
           </div>
         )}
       </div>
 
       {/* API 에러 */}
       {error && (
-        <p style={{ color: "#c47a6a", fontSize: 13, fontFamily: "'Noto Sans KR', sans-serif", textAlign: "center" }}>
-          {error}
-        </p>
+        <p style={{ color: "#c47a6a", fontSize: 13, textAlign: "center" }}>{error}</p>
       )}
 
       {/* 촬영 버튼 */}
@@ -194,7 +186,6 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
         style={{
           color: "#555",
           fontSize: 13,
-          fontFamily: "'Noto Sans KR', sans-serif",
           textAlign: "center",
           lineHeight: 1.7,
           marginTop: 8,

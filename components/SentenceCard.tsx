@@ -64,9 +64,7 @@ export default function SentenceCard({ sentence, index, selected, onToggle }: Se
           fontSize: 15.5,
           lineHeight: 1.85,
           color: selected ? "#e8e4df" : "#c0bdb8",
-          fontFamily: "'Noto Serif KR', serif",
           wordBreak: "keep-all",
-          letterSpacing: "0.01em",
           transition: "color 0.2s ease",
         }}
       >

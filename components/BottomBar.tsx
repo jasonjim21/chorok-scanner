@@ -33,9 +33,7 @@ export default function BottomBar({ selectedCount, onCopy, onRecord }: BottomBar
           textAlign: "center",
           fontSize: 13,
           color: "#00e600",
-          fontFamily: "'Noto Sans KR', sans-serif",
           marginBottom: 12,
-          letterSpacing: "0.03em",
         }}
       >
         {selectedCount}개 문장 선택됨
@@ -56,10 +54,8 @@ export default function BottomBar({ selectedCount, onCopy, onRecord }: BottomBar
             padding: "14px 16px",
             borderRadius: 12,
             fontSize: 14,
-            fontFamily: "'Noto Sans KR', sans-serif",
             cursor: "pointer",
             transition: "all 0.2s ease",
-            letterSpacing: "0.02em",
           }}
         >
           <svg
@@ -92,10 +88,8 @@ export default function BottomBar({ selectedCount, onCopy, onRecord }: BottomBar
             padding: "14px 16px",
             borderRadius: 12,
             fontSize: 14,
-            fontFamily: "'Noto Sans KR', sans-serif",
             cursor: "pointer",
             transition: "all 0.2s ease",
-            letterSpacing: "0.02em",
             boxShadow: "0 4px 20px rgba(45, 80, 40, 0.3)",
           }}
         >

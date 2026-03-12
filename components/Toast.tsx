@@ -20,8 +20,6 @@ export default function Toast({ message, visible }: ToastProps) {
         padding: "12px 24px",
         borderRadius: 100,
         fontSize: 14,
-        fontFamily: "'Noto Serif KR', serif",
-        letterSpacing: "0.02em",
         pointerEvents: "none",
         zIndex: 1000,
         boxShadow: "0 8px 32px rgba(0,0,0,0.3)",

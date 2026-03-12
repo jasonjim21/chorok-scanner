@@ -48,9 +48,7 @@ export default function ProcessingView() {
           style={{
             color: "#e8e4df",
             fontSize: 18,
-            fontFamily: "'Noto Serif KR', serif",
             margin: "0 0 8px 0",
-            letterSpacing: "0.05em",
           }}
         >
           문장을 읽고 있어요
@@ -59,7 +57,6 @@ export default function ProcessingView() {
           style={{
             color: "#888",
             fontSize: 13,
-            fontFamily: "'Noto Sans KR', sans-serif",
             margin: 0,
           }}
         >

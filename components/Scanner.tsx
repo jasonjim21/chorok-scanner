@@ -143,25 +143,14 @@ export default function Scanner() {
         {appState === STATES.CAMERA && (
           <>
             {/* 별꽃 아이콘 */}
-            <svg
-              width="36"
-              height="36"
-              viewBox="0 0 36 36"
-              fill="#00e600"
+            <img
+              src="/icons/icon.svg"
+              width={36}
+              height={34}
+              alt=""
               style={{ display: "block", margin: "0 auto 10px" }}
-            >
-              <path d="M18 2 L20 14 L30 6 L22 16 L34 18 L22 20 L30 30 L20 22 L18 34 L16 22 L6 30 L14 20 L2 18 L14 16 L6 6 L16 14 Z" />
-            </svg>
-            <h1
-              style={{
-                fontSize: 18,
-                fontFamily: "'Noto Sans KR', sans-serif",
-                fontWeight: 500,
-                color: "#00e600",
-                letterSpacing: "0.05em",
-                margin: 0,
-              }}
-            >
+            />
+            <h1 style={{ fontSize: 18, fontWeight: 500, color: "#00e600", margin: 0 }}>
               초록 문장 스캐너
             </h1>
           </>
@@ -169,16 +158,7 @@ export default function Scanner() {
 
         {appState === STATES.RESULTS && (
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <h1
-              style={{
-                fontSize: 18,
-                fontFamily: "'Noto Sans KR', sans-serif",
-                fontWeight: 500,
-                color: "#00e600",
-                letterSpacing: "0.05em",
-                margin: 0,
-              }}
-            >
+            <h1 style={{ fontSize: 18, fontWeight: 500, color: "#00e600", margin: 0 }}>
               초록 문장 스캐너
             </h1>
             <button
@@ -190,7 +170,6 @@ export default function Scanner() {
                 padding: "7px 14px",
                 borderRadius: 100,
                 fontSize: 13,
-                fontFamily: "'Noto Sans KR', sans-serif",
                 cursor: "pointer",
               }}
             >
@@ -200,16 +179,7 @@ export default function Scanner() {
         )}
 
         {appState === STATES.PROCESSING && (
-          <h1
-            style={{
-              fontSize: 18,
-              fontFamily: "'Noto Sans KR', sans-serif",
-              fontWeight: 500,
-              color: "#00e600",
-              letterSpacing: "0.05em",
-              margin: 0,
-            }}
-          >
+          <h1 style={{ fontSize: 18, fontWeight: 500, color: "#00e600", margin: 0 }}>
             초록 문장 스캐너
           </h1>
         )}
