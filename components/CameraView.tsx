@@ -23,7 +23,7 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
       const stream = await navigator.mediaDevices.getUserMedia({
         video: {
           facingMode: "environment",
-          aspectRatio: 3 / 4,
+          aspectRatio: 4 / 3,
         },
         audio: false,
       });
@@ -50,7 +50,6 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
     canvas.height = video.videoHeight;
     canvas.getContext("2d")!.drawImage(video, 0, 0);
     const dataUrl = canvas.toDataURL("image/jpeg", 0.9);
-    stopCamera();
     onImageCapture(dataUrl);
   };
 
@@ -63,7 +62,6 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
       if (!file) return;
       const reader = new FileReader();
       reader.onload = (ev) => {
-        stopCamera();
         onImageCapture(ev.target?.result as string);
       };
       reader.readAsDataURL(file);
@@ -100,7 +98,7 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
         <div
           style={{
             width: "100%",
-            aspectRatio: "3 / 4",
+            aspectRatio: "4 / 3",
             borderRadius: 12,
             overflow: "hidden",
             position: "relative",

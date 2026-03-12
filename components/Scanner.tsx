@@ -210,9 +210,9 @@ export default function Scanner() {
           zIndex: 1,
         }}
       >
-        {appState === STATES.CAMERA && (
+        <div style={{ display: appState === STATES.CAMERA ? "block" : "none" }}>
           <CameraView error={error} onImageCapture={handleImageCapture} />
-        )}
+        </div>
 
         {appState === STATES.PROCESSING && <ProcessingView />}
 
