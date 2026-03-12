@@ -55,7 +55,7 @@ export default function ResultsView({
       >
         <p
           style={{
-            color: "#6b9a5b",
+            color: "#00e600",
             fontSize: 13,
             fontFamily: "'Noto Sans KR', sans-serif",
             letterSpacing: "0.05em",

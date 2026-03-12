@@ -127,85 +127,98 @@ export default function Scanner() {
         maxWidth: 480,
         margin: "0 auto",
         minHeight: "100vh",
-        background: "linear-gradient(180deg, #0f1a0e 0%, #141f13 50%, #111a10 100%)",
+        background: "#000",
         position: "relative",
-        overflow: "hidden",
       }}
     >
-      {/* 배경 그라데이션 오버레이 */}
-      <div
-        style={{
-          position: "fixed",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse at 30% 20%, rgba(107, 154, 91, 0.04) 0%, transparent 60%)",
-          pointerEvents: "none",
-        }}
-      />
-
       {/* 헤더 */}
       <header
-        style={{ padding: "48px 28px 24px", position: "relative", zIndex: 1 }}
+        style={{
+          padding: "52px 24px 20px",
+          textAlign: "center",
+          position: "relative",
+          zIndex: 1,
+        }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-          }}
-        >
-          <div>
+        {appState === STATES.CAMERA && (
+          <>
+            {/* 별꽃 아이콘 */}
+            <svg
+              width="36"
+              height="36"
+              viewBox="0 0 36 36"
+              fill="#00e600"
+              style={{ display: "block", margin: "0 auto 10px" }}
+            >
+              <path d="M18 2 L20 14 L30 6 L22 16 L34 18 L22 20 L30 30 L20 22 L18 34 L16 22 L6 30 L14 20 L2 18 L14 16 L6 6 L16 14 Z" />
+            </svg>
             <h1
               style={{
-                fontSize: 28,
-                fontFamily: "'Noto Serif KR', serif",
-                fontWeight: 300,
-                color: "#e8e4df",
-                letterSpacing: "0.08em",
+                fontSize: 18,
+                fontFamily: "'Noto Sans KR', sans-serif",
+                fontWeight: 500,
+                color: "#00e600",
+                letterSpacing: "0.05em",
                 margin: 0,
               }}
             >
-              초록
+              초록 문장 스캐너
             </h1>
-            <p
+          </>
+        )}
+
+        {appState === STATES.RESULTS && (
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+            <h1
               style={{
-                fontSize: 12,
-                color: "#6b9a5b",
+                fontSize: 18,
                 fontFamily: "'Noto Sans KR', sans-serif",
-                marginTop: 4,
-                letterSpacing: "0.15em",
-                fontWeight: 300,
+                fontWeight: 500,
+                color: "#00e600",
+                letterSpacing: "0.05em",
+                margin: 0,
               }}
             >
-              문장 스캐너
-            </p>
-          </div>
-
-          {appState === STATES.RESULTS && (
+              초록 문장 스캐너
+            </h1>
             <button
               onClick={handleReset}
               style={{
-                background: "rgba(255,255,255,0.06)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                color: "#aaa",
-                padding: "8px 16px",
+                background: "transparent",
+                border: "1px solid #333",
+                color: "#888",
+                padding: "7px 14px",
                 borderRadius: 100,
                 fontSize: 13,
                 fontFamily: "'Noto Sans KR', sans-serif",
                 cursor: "pointer",
-                transition: "all 0.2s ease",
               }}
             >
               다시 촬영
             </button>
-          )}
-        </div>
+          </div>
+        )}
+
+        {appState === STATES.PROCESSING && (
+          <h1
+            style={{
+              fontSize: 18,
+              fontFamily: "'Noto Sans KR', sans-serif",
+              fontWeight: 500,
+              color: "#00e600",
+              letterSpacing: "0.05em",
+              margin: 0,
+            }}
+          >
+            초록 문장 스캐너
+          </h1>
+        )}
       </header>
 
       {/* 메인 콘텐츠 */}
       <main
         style={{
-          padding: "0 28px 140px",
+          padding: "0 20px 140px",
           position: "relative",
           zIndex: 1,
         }}

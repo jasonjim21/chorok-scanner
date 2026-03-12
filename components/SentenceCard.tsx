@@ -14,8 +14,8 @@ export default function SentenceCard({ sentence, index, selected, onToggle }: Se
       style={{
         position: "relative",
         padding: "16px 20px 16px 52px",
-        background: selected ? "rgba(45, 80, 40, 0.18)" : "rgba(255,255,255,0.03)",
-        borderLeft: selected ? "3px solid #6b9a5b" : "3px solid transparent",
+        background: selected ? "rgba(0, 230, 0, 0.08)" : "rgba(255,255,255,0.03)",
+        borderLeft: selected ? "3px solid #00e600" : "3px solid transparent",
         borderRadius: 4,
         transition: "all 0.2s ease",
         cursor: "pointer",
@@ -33,8 +33,8 @@ export default function SentenceCard({ sentence, index, selected, onToggle }: Se
           width: 22,
           height: 22,
           borderRadius: 6,
-          border: selected ? "2px solid #6b9a5b" : "2px solid rgba(255,255,255,0.15)",
-          background: selected ? "rgba(107, 154, 91, 0.3)" : "transparent",
+          border: selected ? "2px solid #00e600" : "2px solid rgba(255,255,255,0.15)",
+          background: selected ? "rgba(0, 230, 0, 0.2)" : "transparent",
           transition: "all 0.2s ease",
           display: "flex",
           alignItems: "center",
@@ -48,7 +48,7 @@ export default function SentenceCard({ sentence, index, selected, onToggle }: Se
             height="12"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="#6b9a5b"
+            stroke="#00e600"
             strokeWidth="3"
             strokeLinecap="round"
             strokeLinejoin="round"

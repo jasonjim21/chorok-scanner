@@ -17,7 +17,7 @@ export default function ProcessingView() {
           style={{
             position: "absolute",
             inset: 0,
-            border: "2px solid rgba(107, 154, 91, 0.15)",
+            border: "2px solid rgba(0, 230, 0, 0.15)",
             borderRadius: "50%",
           }}
         />
@@ -26,7 +26,7 @@ export default function ProcessingView() {
             position: "absolute",
             inset: 0,
             border: "2px solid transparent",
-            borderTopColor: "#6b9a5b",
+            borderTopColor: "#00e600",
             borderRadius: "50%",
             animation: "spin 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite",
           }}
@@ -36,7 +36,7 @@ export default function ProcessingView() {
             position: "absolute",
             inset: 8,
             border: "2px solid transparent",
-            borderTopColor: "#4a7a3f",
+            borderTopColor: "#00a000",
             borderRadius: "50%",
             animation: "spin 0.9s cubic-bezier(0.5, 0, 0.5, 1) infinite reverse",
           }}
