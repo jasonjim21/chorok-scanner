@@ -57,9 +57,10 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ sentences });
   } catch (err) {
-    console.error("Scan API error:", err);
+    const message = err instanceof Error ? err.message : String(err);
+    console.error("Scan API error:", message);
     return NextResponse.json(
-      { error: "텍스트를 인식하지 못했어요. 다시 촬영해주세요." },
+      { error: "텍스트를 인식하지 못했어요. 다시 촬영해주세요.", detail: message },
       { status: 500 }
     );
   }
