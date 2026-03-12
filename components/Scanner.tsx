@@ -43,56 +43,46 @@ export default function Scanner() {
         const canvas = document.createElement("canvas");
         canvas.width = img.width * scale;
         canvas.height = img.height * scale;
-        const ctx = canvas.getContext("2d")!;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL("image/jpeg", 0.8));
+        canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
+        resolve(canvas.toDataURL("image/jpeg", 0.85));
       };
       img.src = dataUrl;
     });
   };
 
-  const handleCapture = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = (e.target as HTMLInputElement).files?.[0];
-    if (!file) return;
+  const handleImageCapture = async (dataUrl: string) => {
+    const compressed = await compressImage(dataUrl);
+    const base64Data = compressed.split(",")[1];
 
-    const reader = new FileReader();
-    reader.onload = async (event) => {
-      const originalDataUrl = event.target?.result as string;
-      const compressed = await compressImage(originalDataUrl);
-      const base64Data = compressed.split(",")[1];
-      const mediaType = "image/jpeg";
+    setCapturedImage(compressed);
+    setAppState(STATES.PROCESSING);
+    setError(null);
 
-      setCapturedImage(compressed);
-      setAppState(STATES.PROCESSING);
-      setError(null);
+    try {
+      const response = await fetch("/api/scan", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: base64Data, mediaType: "image/jpeg" }),
+      });
 
-      try {
-        const response = await fetch("/api/scan", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ image: base64Data, mediaType }),
-        });
+      const data = await response.json();
 
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || "API 오류");
-        }
-
-        if (Array.isArray(data.sentences) && data.sentences.length > 0) {
-          setSentences(data.sentences);
-          setSelected(new Array(data.sentences.length).fill(false));
-          setAppState(STATES.RESULTS);
-        } else {
-          throw new Error("No sentences found");
-        }
-      } catch (err) {
-        console.error("Error:", err);
-        setError("텍스트를 인식하지 못했어요. 다시 촬영해주세요.");
-        setAppState(STATES.CAMERA);
+      if (!response.ok) {
+        throw new Error(data.error || "API 오류");
       }
-    };
-    reader.readAsDataURL(file);
+
+      if (Array.isArray(data.sentences) && data.sentences.length > 0) {
+        setSentences(data.sentences);
+        setSelected(new Array(data.sentences.length).fill(false));
+        setAppState(STATES.RESULTS);
+      } else {
+        throw new Error("No sentences found");
+      }
+    } catch (err) {
+      console.error("Error:", err);
+      setError("텍스트를 인식하지 못했어요. 다시 촬영해주세요.");
+      setAppState(STATES.CAMERA);
+    }
   };
 
   const handleToggle = (index: number) => {
@@ -218,7 +208,7 @@ export default function Scanner() {
         }}
       >
         {appState === STATES.CAMERA && (
-          <CameraView error={error} onCapture={handleCapture} />
+          <CameraView error={error} onImageCapture={handleImageCapture} />
         )}
 
         {appState === STATES.PROCESSING && <ProcessingView />}
