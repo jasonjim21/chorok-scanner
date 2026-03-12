@@ -106,8 +106,11 @@ export default function Scanner() {
 
   const handleRecord = async () => {
     const text = getSelectedText();
-    const success = await copyToClipboard(text);
-    showToast(success ? "초록에 기록되었어요 (노션 연동 예정)" : "복사에 실패했어요");
+    await copyToClipboard(text);
+    showToast("클립보드에 복사됐어요 — 노션에 붙여넣기 해주세요");
+    setTimeout(() => {
+      window.location.href = "notion://";
+    }, 800);
   };
 
   const handleReset = () => {
