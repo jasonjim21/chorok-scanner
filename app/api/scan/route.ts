@@ -5,6 +5,23 @@ const anthropic = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
 });
 
+function extractJsonArray(text: string): string[] | null {
+  // 1. ```json ... ``` 블록 제거 후 시도
+  const cleaned = text.replace(/```json\s*/g, "").replace(/```/g, "").trim();
+
+  // 2. 텍스트에서 [ ... ] 배열 부분만 추출
+  const match = cleaned.match(/\[[\s\S]*\]/);
+  if (!match) return null;
+
+  try {
+    const parsed = JSON.parse(match[0]);
+    if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+  } catch {
+    // 파싱 실패 시 null 반환
+  }
+  return null;
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { image, mediaType } = await req.json();
@@ -15,7 +32,7 @@ export async function POST(req: NextRequest) {
 
     const response = await anthropic.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 1000,
+      max_tokens: 2048,
       messages: [
         {
           role: "user",
@@ -45,15 +62,15 @@ export async function POST(req: NextRequest) {
       ],
     });
 
-    const text = response.content
+    const rawText = response.content
       .map((item) => (item.type === "text" ? item.text : ""))
       .filter(Boolean)
       .join("");
 
-    const cleanText = text.replace(/```json|```/g, "").trim();
-    const sentences = JSON.parse(cleanText);
+    const sentences = extractJsonArray(rawText);
 
-    if (!Array.isArray(sentences) || sentences.length === 0) {
+    if (!sentences) {
+      console.error("JSON 파싱 실패. 원문:", rawText);
       return NextResponse.json(
         { error: "텍스트를 인식하지 못했어요. 다시 촬영해주세요." },
         { status: 422 }
