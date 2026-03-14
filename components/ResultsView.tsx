@@ -35,7 +35,6 @@ export default function ResultsView({
         <div
           style={{
             position: "relative",
-            marginBottom: 28,
           }}
         >
           <div
