@@ -140,14 +140,14 @@ export default function Scanner() {
         maxWidth: 480,
         margin: "0 auto",
         minHeight: "100vh",
-        background: "#000",
+        background: "#111111",
         position: "relative",
       }}
     >
       {/* 헤더 */}
       <header
         style={{
-          padding: "52px 24px 20px",
+          padding: "40px 24px 16px",
           textAlign: "center",
           position: "relative",
           zIndex: 1,
@@ -155,8 +155,8 @@ export default function Scanner() {
       >
         <img
           src="/icons/icon.svg"
-          width={36}
-          height={34}
+          width={42}
+          height={39}
           alt=""
           style={{ display: "block", margin: "0 auto" }}
         />
@@ -209,7 +209,7 @@ export default function Scanner() {
             zIndex: 1,
           }}
         >
-          <p style={{ color: "#333", fontSize: 11 }}>© 2026. CHOROK All rights reserved.</p>
+          <p style={{ color: "#676767", fontSize: 10, letterSpacing: "-0.02em" }}>ⓒ 2026. CHOROK All rights reserved.</p>
         </footer>
       )}
 

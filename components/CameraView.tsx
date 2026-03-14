@@ -69,130 +69,174 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        gap: 16,
+        minHeight: "calc(100svh - 115px)",
         animation: "fadeIn 0.4s ease",
       }}
     >
-      {/* 카메라 프레임 */}
+      {/* 카메라 뷰파인더 — 그라디언트 border */}
       <div
         style={{
           width: "100%",
-          aspectRatio: "4 / 3",
-          borderRadius: 16,
-          overflow: "hidden",
-          background: cameraReady ? "#000" : "#111",
-          position: "relative",
+          padding: 1,
+          borderRadius: 9,
+          background:
+            "linear-gradient(173deg, rgba(255,255,255,0.5) 0%, rgba(186,186,186,0.5) 100%)",
+          marginBottom: 10,
         }}
       >
-        <video
-          ref={videoRef}
-          autoPlay
-          playsInline
-          muted
+        <div
           style={{
             width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: cameraReady ? "block" : "none",
+            aspectRatio: "4 / 3",
+            borderRadius: 8,
+            overflow: "hidden",
+            background: "#000000",
+            position: "relative",
           }}
-        />
-
-        {!cameraReady && !cameraError && (
-          <div
+        >
+          <video
+            ref={videoRef}
+            autoPlay
+            playsInline
+            muted
             style={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: cameraReady ? "block" : "none",
             }}
-          >
-            <p style={{ color: "#444", fontSize: 13 }}>카메라 준비 중...</p>
-          </div>
-        )}
+          />
 
-        {cameraError && (
-          <div
-            style={{
-              position: "absolute",
-              inset: 0,
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: 8,
-              padding: 24,
-            }}
-          >
-            <p style={{ color: "#c47a6a", fontSize: 14, textAlign: "center" }}>{cameraError}</p>
-            <p style={{ color: "#555", fontSize: 12, textAlign: "center" }}>갤러리에서 사진을 선택해주세요.</p>
-          </div>
-        )}
+          {!cameraReady && !cameraError && (
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <p style={{ color: "#444", fontSize: 13 }}>카메라 준비 중...</p>
+            </div>
+          )}
+
+          {cameraError && (
+            <div
+              style={{
+                position: "absolute",
+                inset: 0,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: 8,
+                padding: 24,
+              }}
+            >
+              <p style={{ color: "#c47a6a", fontSize: 14, textAlign: "center" }}>{cameraError}</p>
+              <p style={{ color: "#555", fontSize: 12, textAlign: "center" }}>갤러리에서 사진을 선택해주세요.</p>
+            </div>
+          )}
+        </div>
       </div>
 
-      {/* API 에러 */}
-      {error && (
-        <p style={{ color: "#c47a6a", fontSize: 13, textAlign: "center" }}>{error}</p>
-      )}
-
-      {/* 촬영 팁 */}
+      {/* 팁 + API 에러 */}
       <p
         style={{
-          color: "#555",
-          fontSize: 13,
+          color: error ? "#c47a6a" : "#b4b4b4",
+          fontSize: 12,
           textAlign: "center",
-          lineHeight: 1.7,
+          letterSpacing: "-0.24px",
+          lineHeight: "18px",
+          whiteSpace: "nowrap",
         }}
       >
-        페이지를 평평하게 펴고 그림자가 지지 않게 촬영하세요.
+        {error ?? "페이지를 평평하게 펴고, 그림자가 지지 않게 촬영하세요."}
       </p>
+
+      {/* 스페이서 — 버튼을 하단으로 밀기 */}
+      <div style={{ flex: 1 }} />
 
       {/* 촬영 버튼 */}
       <button
         onClick={handleShoot}
         disabled={!cameraReady}
         style={{
-          width: "60%",
+          width: "46%",
+          height: 62,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: cameraReady ? "#00e600" : "#111",
+          background: cameraReady ? "#00e600" : "#1a1a1a",
           border: "none",
-          borderRadius: 100,
-          padding: "16px 0",
+          borderRadius: 31,
           cursor: cameraReady ? "pointer" : "default",
           transition: "all 0.2s ease",
-          marginTop: 8,
         }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={cameraReady ? "#000" : "#333"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-          <circle cx="12" cy="13" r="4" />
-        </svg>
+        <div style={{ filter: cameraReady ? "drop-shadow(0 0 2px #17ca00)" : "none" }}>
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke={cameraReady ? "#000" : "#333"}
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" />
+          </svg>
+        </div>
       </button>
 
-      {/* 갤러리 버튼 */}
-      <button
-        onClick={handleGallery}
+      {/* 갤러리 버튼 — 그라디언트 border + 흰색→회색 그라디언트 */}
+      <div
         style={{
-          width: "60%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: "rgba(255,255,255,0.1)",
-          border: "none",
-          borderRadius: 100,
-          padding: "16px 0",
-          cursor: "pointer",
-          transition: "all 0.2s ease",
+          marginTop: 4,
+          width: "46%",
+          padding: 1,
+          borderRadius: 28,
+          background: "linear-gradient(180deg, #ffffff 0%, #bababa 100%)",
+          boxShadow: "2px 2px 4px rgba(0,0,0,0.6)",
         }}
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-          <circle cx="8.5" cy="8.5" r="1.5" />
-          <polyline points="21 15 16 10 5 21" />
-        </svg>
-      </button>
+        <button
+          onClick={handleGallery}
+          style={{
+            width: "100%",
+            height: 52,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "linear-gradient(135deg, #ffffff 0%, #cccccc 100%)",
+            border: "none",
+            borderRadius: 27,
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+          }}
+        >
+          <svg
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#555"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
+          </svg>
+        </button>
+      </div>
+
+      {/* 하단 여백 (copyright footer 공간 확보) */}
+      <div style={{ height: 48 }} />
     </div>
   );
 }
