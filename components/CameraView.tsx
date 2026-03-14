@@ -159,49 +159,63 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
       {/* 스페이서 — 버튼을 하단으로 밀기 */}
       <div style={{ flex: 1 }} />
 
-      {/* 촬영 버튼 */}
-      <button
-        onClick={handleShoot}
-        disabled={!cameraReady}
+      {/* 촬영 버튼 — 그라디언트 border + 그라디언트 fill */}
+      <div
         style={{
-          width: "46%",
-          height: 62,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          background: cameraReady ? "#00e600" : "#1a1a1a",
-          border: "none",
-          borderRadius: 31,
-          cursor: cameraReady ? "pointer" : "default",
-          transition: "all 0.2s ease",
+          width: 170,
+          padding: 1,
+          borderRadius: 28,
+          background: cameraReady
+            ? "linear-gradient(180deg, #1EFF00 0%, #13A600 100%)"
+            : "linear-gradient(180deg, #333 0%, #222 100%)",
+          boxShadow: "2px 2px 4px 0 rgba(0,0,0,0.60)",
         }}
       >
-        <div style={{ filter: cameraReady ? "drop-shadow(0 0 2px #17ca00)" : "none" }}>
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke={cameraReady ? "#000" : "#333"}
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-            <circle cx="12" cy="13" r="4" />
-          </svg>
-        </div>
-      </button>
+        <button
+          onClick={handleShoot}
+          disabled={!cameraReady}
+          style={{
+            width: "100%",
+            height: 52,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            background: cameraReady
+              ? "linear-gradient(96deg, #B4FFAA 0%, #1EFF00 51.92%, #B4FFAA 100%)"
+              : "#1a1a1a",
+            border: "none",
+            borderRadius: 27,
+            cursor: cameraReady ? "pointer" : "default",
+            transition: "all 0.2s ease",
+          }}
+        >
+          <div style={{ filter: cameraReady ? "drop-shadow(0 0 2px #17ca00)" : "none" }}>
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke={cameraReady ? "#000" : "#333"}
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+              <circle cx="12" cy="13" r="4" />
+            </svg>
+          </div>
+        </button>
+      </div>
 
       {/* 갤러리 버튼 — 그라디언트 border + 흰색→회색 그라디언트 */}
       <div
         style={{
-          marginTop: 4,
-          width: "46%",
+          marginTop: 8,
+          width: 170,
           padding: 1,
           borderRadius: 28,
-          background: "linear-gradient(180deg, #ffffff 0%, #bababa 100%)",
-          boxShadow: "2px 2px 4px rgba(0,0,0,0.6)",
+          background: "linear-gradient(180deg, #FFF 0%, #BABABA 100%)",
+          boxShadow: "2px 2px 4px 0 rgba(0,0,0,0.60)",
         }}
       >
         <button
@@ -212,7 +226,7 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background: "linear-gradient(135deg, #ffffff 0%, #cccccc 100%)",
+            background: "linear-gradient(96deg, #FFF 0%, #CCC 100%)",
             border: "none",
             borderRadius: 27,
             cursor: "pointer",
