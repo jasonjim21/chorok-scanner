@@ -78,9 +78,9 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
         style={{
           width: "100%",
           aspectRatio: "4 / 3",
-          borderRadius: 20,
+          borderRadius: 16,
           overflow: "hidden",
-          background: cameraReady ? "#000" : "#1a1a1a",
+          background: cameraReady ? "#000" : "#111",
           position: "relative",
         }}
       >
@@ -135,6 +135,18 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
         <p style={{ color: "#c47a6a", fontSize: 13, textAlign: "center" }}>{error}</p>
       )}
 
+      {/* 촬영 팁 */}
+      <p
+        style={{
+          color: "#555",
+          fontSize: 13,
+          textAlign: "center",
+          lineHeight: 1.7,
+        }}
+      >
+        페이지를 평평하게 펴고 그림자가 지지 않게 촬영하세요.
+      </p>
+
       {/* 촬영 버튼 */}
       <button
         onClick={handleShoot}
@@ -144,15 +156,16 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: cameraReady ? "#00e600" : "#1a1a1a",
+          background: cameraReady ? "#00e600" : "#111",
           border: "none",
           borderRadius: 100,
           padding: "16px 0",
           cursor: cameraReady ? "pointer" : "default",
           transition: "all 0.2s ease",
+          marginTop: 8,
         }}
       >
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={cameraReady ? "#000" : "#444"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke={cameraReady ? "#000" : "#333"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
           <circle cx="12" cy="13" r="4" />
         </svg>
@@ -166,37 +179,20 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "transparent",
-          border: "1.5px solid #00e600",
+          background: "rgba(255,255,255,0.1)",
+          border: "none",
           borderRadius: 100,
-          padding: "14px 0",
+          padding: "16px 0",
           cursor: "pointer",
           transition: "all 0.2s ease",
         }}
       >
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#00e600" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#888" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
           <circle cx="8.5" cy="8.5" r="1.5" />
           <polyline points="21 15 16 10 5 21" />
         </svg>
       </button>
-
-      {/* 촬영 팁 */}
-      <p
-        style={{
-          color: "#555",
-          fontSize: 13,
-          textAlign: "center",
-          lineHeight: 1.7,
-          marginTop: 8,
-        }}
-      >
-        페이지를 평평하게 펴고
-        <br />
-        그림자가 지지 않게 촬영하면
-        <br />
-        인식률이 높아집니다.
-      </p>
     </div>
   );
 }

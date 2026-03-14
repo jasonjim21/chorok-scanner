@@ -1,14 +1,11 @@
 "use client";
 
 interface BottomBarProps {
-  selectedCount: number;
   onCopy: () => void;
   onRecord: () => void;
 }
 
-export default function BottomBar({ selectedCount, onCopy, onRecord }: BottomBarProps) {
-  const visible = selectedCount > 0;
-
+export default function BottomBar({ onCopy, onRecord }: BottomBarProps) {
   return (
     <div
       style={{
@@ -22,24 +19,11 @@ export default function BottomBar({ selectedCount, onCopy, onRecord }: BottomBar
         paddingBottom: "max(16px, env(safe-area-inset-bottom))",
         background:
           "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.95) 20%, #000 100%)",
-        opacity: visible ? 1 : 0,
-        pointerEvents: visible ? "auto" : "none",
-        transition: "opacity 0.25s ease",
         zIndex: 100,
       }}
     >
-      <p
-        style={{
-          textAlign: "center",
-          fontSize: 13,
-          color: "#00e600",
-          marginBottom: 12,
-        }}
-      >
-        {selectedCount}개 문장 선택됨
-      </p>
-
       <div style={{ display: "flex", gap: 10 }}>
+        {/* 클립보드 복사 버튼 */}
         <button
           onClick={onCopy}
           style={{
@@ -48,8 +32,8 @@ export default function BottomBar({ selectedCount, onCopy, onRecord }: BottomBar
             alignItems: "center",
             justifyContent: "center",
             gap: 8,
-            background: "rgba(255,255,255,0.07)",
-            border: "1px solid rgba(255,255,255,0.12)",
+            background: "transparent",
+            border: "1.5px solid rgba(255,255,255,0.25)",
             color: "#ccc",
             padding: "14px 16px",
             borderRadius: 12,
@@ -74,6 +58,7 @@ export default function BottomBar({ selectedCount, onCopy, onRecord }: BottomBar
           클립보드에 복사
         </button>
 
+        {/* 노션 버튼 */}
         <button
           onClick={onRecord}
           style={{
@@ -88,24 +73,24 @@ export default function BottomBar({ selectedCount, onCopy, onRecord }: BottomBar
             padding: "14px 16px",
             borderRadius: 12,
             fontSize: 14,
+            fontWeight: 600,
             cursor: "pointer",
             transition: "all 0.2s ease",
-            boxShadow: "0 4px 20px rgba(45, 80, 40, 0.3)",
           }}
         >
           <svg
-            width="16"
-            height="16"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            strokeWidth="1.5"
+            strokeWidth="2.5"
             strokeLinecap="round"
             strokeLinejoin="round"
           >
-            <path d="M12 5v14M5 12h14" />
+            <path d="M5 5v14M5 5l14 14M19 5v14" />
           </svg>
-          초록에 바로 기록
+          노션으로 이동
         </button>
       </div>
     </div>

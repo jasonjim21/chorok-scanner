@@ -20,6 +20,7 @@ export default function Scanner() {
   const [appState, setAppState] = useState<AppState>(STATES.CAMERA);
   const [sentences, setSentences] = useState<string[]>([]);
   const [selected, setSelected] = useState<boolean[]>([]);
+  const [merged, setMerged] = useState(false);
   const [toast, setToast] = useState({ message: "", visible: false });
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -32,10 +33,13 @@ export default function Scanner() {
   const selectedCount = selected.filter(Boolean).length;
 
   const getSelectedText = () => {
+    if (merged && selectedCount >= 2) {
+      return sentences.filter((_, i) => selected[i]).join(" ");
+    }
     return sentences.filter((_, i) => selected[i]).join("\n");
   };
 
-  const compressImage = (dataUrl: string, maxWidth = 1600): Promise<string> => {
+  const compressImage = (dataUrl: string, maxWidth = 1200): Promise<string> => {
     return new Promise((resolve) => {
       const img = new Image();
       img.onload = () => {
@@ -44,7 +48,7 @@ export default function Scanner() {
         canvas.width = img.width * scale;
         canvas.height = img.height * scale;
         canvas.getContext("2d")!.drawImage(img, 0, 0, canvas.width, canvas.height);
-        resolve(canvas.toDataURL("image/jpeg", 0.85));
+        resolve(canvas.toDataURL("image/jpeg", 0.8));
       };
       img.src = dataUrl;
     });
@@ -74,6 +78,7 @@ export default function Scanner() {
       if (Array.isArray(data.sentences) && data.sentences.length > 0) {
         setSentences(data.sentences);
         setSelected(new Array(data.sentences.length).fill(false));
+        setMerged(false);
         setAppState(STATES.RESULTS);
       } else {
         throw new Error("No sentences found");
@@ -86,6 +91,7 @@ export default function Scanner() {
   };
 
   const handleToggle = (index: number) => {
+    setMerged(false);
     setSelected((prev) => {
       const next = [...prev];
       next[index] = !next[index];
@@ -94,19 +100,25 @@ export default function Scanner() {
   };
 
   const handleSelectAll = () => {
+    setMerged(false);
     const allSelected = selected.every(Boolean);
     setSelected(new Array(sentences.length).fill(!allSelected));
   };
 
+  const handleMerge = () => {
+    setMerged((prev) => !prev);
+  };
+
   const handleCopy = async () => {
     const text = getSelectedText();
+    if (!text) return;
     const success = await copyToClipboard(text);
     showToast(success ? "클립보드에 복사되었어요" : "복사에 실패했어요");
   };
 
   const handleRecord = async () => {
     const text = getSelectedText();
-    await copyToClipboard(text);
+    if (text) await copyToClipboard(text);
     showToast("클립보드에 복사됐어요 — 노션에 붙여넣기 해주세요");
     setTimeout(() => {
       window.location.href = "notion://";
@@ -117,6 +129,7 @@ export default function Scanner() {
     setAppState(STATES.CAMERA);
     setSentences([]);
     setSelected([]);
+    setMerged(false);
     setCapturedImage(null);
     setError(null);
   };
@@ -140,49 +153,13 @@ export default function Scanner() {
           zIndex: 1,
         }}
       >
-        {appState === STATES.CAMERA && (
-          <>
-            {/* 별꽃 아이콘 */}
-            <img
-              src="/icons/icon.svg"
-              width={36}
-              height={34}
-              alt=""
-              style={{ display: "block", margin: "0 auto 10px" }}
-            />
-            <h1 style={{ fontSize: 18, fontWeight: 500, color: "#00e600", margin: 0 }}>
-              초록 문장 스캐너
-            </h1>
-          </>
-        )}
-
-        {appState === STATES.RESULTS && (
-          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-            <h1 style={{ fontSize: 18, fontWeight: 500, color: "#00e600", margin: 0 }}>
-              초록 문장 스캐너
-            </h1>
-            <button
-              onClick={handleReset}
-              style={{
-                background: "transparent",
-                border: "1px solid #333",
-                color: "#888",
-                padding: "7px 14px",
-                borderRadius: 100,
-                fontSize: 13,
-                cursor: "pointer",
-              }}
-            >
-              다시 촬영
-            </button>
-          </div>
-        )}
-
-        {appState === STATES.PROCESSING && (
-          <h1 style={{ fontSize: 18, fontWeight: 500, color: "#00e600", margin: 0 }}>
-            초록 문장 스캐너
-          </h1>
-        )}
+        <img
+          src="/icons/icon.svg"
+          width={36}
+          height={34}
+          alt=""
+          style={{ display: "block", margin: "0 auto" }}
+        />
       </header>
 
       {/* 메인 콘텐츠 */}
@@ -204,18 +181,36 @@ export default function Scanner() {
             sentences={sentences}
             selected={selected}
             capturedImage={capturedImage}
+            merged={merged}
             onToggle={handleToggle}
             onSelectAll={handleSelectAll}
+            onMerge={handleMerge}
+            onRetake={handleReset}
           />
         )}
       </main>
 
       {appState === STATES.RESULTS && (
-        <BottomBar
-          selectedCount={selectedCount}
-          onCopy={handleCopy}
-          onRecord={handleRecord}
-        />
+        <BottomBar onCopy={handleCopy} onRecord={handleRecord} />
+      )}
+
+      {appState === STATES.CAMERA && (
+        <footer
+          style={{
+            position: "fixed",
+            bottom: 0,
+            left: "50%",
+            transform: "translateX(-50%)",
+            width: "100%",
+            maxWidth: 480,
+            textAlign: "center",
+            paddingBottom: "max(24px, env(safe-area-inset-bottom))",
+            pointerEvents: "none",
+            zIndex: 1,
+          }}
+        >
+          <p style={{ color: "#333", fontSize: 11 }}>© 2026. CHOROK All rights reserved.</p>
+        </footer>
       )}
 
       <Toast message={toast.message} visible={toast.visible} />
