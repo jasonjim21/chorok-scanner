@@ -146,36 +146,6 @@ export default function Scanner() {
         position: "relative",
       }}
     >
-      {/* 결과 페이지 배경 이미지 + 오버레이 */}
-      {appState === STATES.RESULTS && capturedImage && (
-        <>
-          <img
-            src={capturedImage}
-            alt=""
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "top",
-              zIndex: 0,
-            }}
-          />
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: "100%",
-              background: "rgba(0,0,0,0.6)",
-              zIndex: 0,
-            }}
-          />
-        </>
-      )}
       {/* 헤더 */}
       <header
         style={{
@@ -226,6 +196,7 @@ export default function Scanner() {
           <ResultsView
             sentences={sentences}
             selected={selected}
+            capturedImage={capturedImage}
             merged={merged}
             onToggle={handleToggle}
             onSelectAll={handleSelectAll}
