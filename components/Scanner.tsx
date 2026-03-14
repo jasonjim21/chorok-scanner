@@ -155,10 +155,14 @@ export default function Scanner() {
       >
         <img
           src="/icons/icon.svg"
-          width={42}
-          height={39}
           alt=""
-          style={{ display: "block", margin: "0 auto" }}
+          style={{
+            display: "block",
+            margin: "0 auto",
+            width: 42,
+            height: 39,
+            aspectRatio: "42 / 39",
+          }}
         />
       </header>
 
