@@ -244,18 +244,27 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
           }}
         >
           <svg
-            width="22"
-            height="22"
-            viewBox="0 0 24 24"
+            width="25"
+            height="25"
+            viewBox="0 0 29 29"
             fill="none"
-            stroke="#555"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <polyline points="21 15 16 10 5 21" />
+            <g filter="url(#gallery_shadow)">
+              <path d="M4.77778 27C4.01389 27 3.36019 26.7282 2.81667 26.1847C2.27315 25.6412 2.00093 24.987 2 24.2222V4.77778C2 4.01389 2.27222 3.36019 2.81667 2.81667C3.36111 2.27315 4.01481 2.00093 4.77778 2H24.2222C24.9861 2 25.6403 2.27222 26.1847 2.81667C26.7292 3.36111 27.0009 4.01481 27 4.77778V24.2222C27 24.9861 26.7282 25.6403 26.1847 26.1847C25.6412 26.7292 24.987 27.0009 24.2222 27H4.77778ZM6.16667 21.4444H22.8333L17.625 14.5L13.4583 20.0556L10.3333 15.8889L6.16667 21.4444Z" fill="#424242"/>
+            </g>
+            <defs>
+              <filter id="gallery_shadow" x="0" y="0" width="29" height="29" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset/>
+                <feGaussianBlur stdDeviation="1"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.652212 0 0 0 0 0.652212 0 0 0 0 0.652212 0 0 0 1 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_17"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_17" result="shape"/>
+              </filter>
+            </defs>
           </svg>
         </button>
       </div>
