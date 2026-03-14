@@ -81,13 +81,13 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
           borderRadius: 9,
           background:
             "linear-gradient(173deg, rgba(255,255,255,0.5) 0%, rgba(186,186,186,0.5) 100%)",
-          marginBottom: 10,
+          marginBottom: 8,
         }}
       >
         <div
           style={{
             width: "100%",
-            aspectRatio: "4 / 3",
+            aspectRatio: "342 / 303",
             borderRadius: 8,
             overflow: "hidden",
             background: "#000000",
@@ -146,6 +146,7 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
         style={{
           color: error ? "#c47a6a" : "#b4b4b4",
           fontSize: 12,
+          fontWeight: 300,
           textAlign: "center",
           letterSpacing: "-0.24px",
           lineHeight: "18px",
