@@ -42,7 +42,7 @@ export default function ResultsView({
             style={{
               borderRadius: 8,
               overflow: "hidden",
-              position: "relative",
+              maxHeight: 100,
             }}
           >
             <img
@@ -50,25 +50,21 @@ export default function ResultsView({
               alt="촬영한 페이지"
               style={{
                 width: "100%",
+                objectFit: "cover",
+                objectPosition: "top",
+                opacity: 0.5,
                 display: "block",
               }}
             />
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                background: "rgba(0,0,0,0.6)",
-              }}
-            />
           </div>
-          {/* 재촬영 버튼: 이미지 중앙 */}
+          {/* 재촬영 버튼: 흰색 라인 12px 위 */}
           <button
             onClick={onRetake}
             style={{
               position: "absolute",
-              top: "50%",
+              bottom: -16,
               left: "50%",
-              transform: "translate(-50%, -50%)",
+              transform: "translateX(-50%)",
               width: 63,
               height: 32,
               borderRadius: 34,
