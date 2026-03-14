@@ -16,7 +16,7 @@ export default function BottomBar({ onCopy, onRecord }: BottomBarProps) {
         width: "100%",
         maxWidth: 480,
         background:
-          "linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.95) 30%, #000 100%)",
+          "#050505",
         paddingTop: 32,
         paddingLeft: 24,
         paddingRight: 16,

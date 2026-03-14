@@ -39,7 +39,7 @@ export default function ResultsView({
         >
           <div
             style={{
-              borderRadius: 8,
+              borderRadius: "8px 8px 0 0",
               overflow: "hidden",
               maxHeight: 100,
             }}
@@ -61,9 +61,9 @@ export default function ResultsView({
             onClick={onRetake}
             style={{
               position: "absolute",
-              bottom: -16,
+              top: "50%",
               left: "50%",
-              transform: "translateX(-50%)",
+              transform: "translate(-50%, -50%)",
               width: 63,
               height: 32,
               borderRadius: 34,
@@ -88,7 +88,7 @@ export default function ResultsView({
         style={{
           marginLeft: -20,
           marginRight: -20,
-          background: "linear-gradient(180deg, #050505 0%, #131313 100%)",
+          background: "#050505",
           borderTop: `1px solid ${selectedCount > 0 ? "#1EFF00" : "#EEEEEE"}`,
           transition: "border-top-color 0.2s ease",
           minHeight: 644,
