@@ -189,21 +189,31 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
             transition: "all 0.2s ease",
           }}
         >
-          <div style={{ filter: cameraReady ? "drop-shadow(0 0 2px #17ca00)" : "none" }}>
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke={cameraReady ? "#000" : "#333"}
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-              <circle cx="12" cy="13" r="4" />
-            </svg>
-          </div>
+          <svg
+            width="26.672"
+            height="23.996"
+            viewBox="0 0 31 28"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ opacity: cameraReady ? 1 : 0.3 }}
+          >
+            <g filter="url(#cam_shadow)">
+              <path d="M15.3347 11.332C13.1663 11.332 11.334 13.1637 11.334 15.3313C11.334 17.4989 13.1663 19.3305 15.3347 19.3305C17.5031 19.3305 19.3355 17.4989 19.3355 15.3313C19.3355 13.1637 17.5031 11.332 15.3347 11.332Z" fill="#181818"/>
+              <path d="M26.0045 5.99926H22.5558L18.9458 2.39059C18.6958 2.14057 18.3566 2.00008 18.003 2H12.6686C12.315 2.00008 11.9758 2.14057 11.7258 2.39059L8.1158 5.99926H4.66716C3.19622 5.99926 2 7.19504 2 8.66543V23.3294C2 24.7998 3.19622 25.9955 4.66716 25.9955H26.0045C27.4754 25.9955 28.6716 24.7998 28.6716 23.3294V8.66543C28.6716 7.19504 27.4754 5.99926 26.0045 5.99926ZM15.3358 21.9963C11.7218 21.9963 8.6679 18.9435 8.6679 15.3309C8.6679 11.7182 11.7218 8.66543 15.3358 8.66543C18.9498 8.66543 22.0037 11.7182 22.0037 15.3309C22.0037 18.9435 18.9498 21.9963 15.3358 21.9963Z" fill="#181818"/>
+            </g>
+            <defs>
+              <filter id="cam_shadow" x="0" y="0" width="30.6716" height="27.9955" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+                <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+                <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                <feOffset/>
+                <feGaussianBlur stdDeviation="1"/>
+                <feComposite in2="hardAlpha" operator="out"/>
+                <feColorMatrix type="matrix" values="0 0 0 0 0.0926401 0 0 0 0 0.794058 0 0 0 0 0 0 0 0 1 0"/>
+                <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_3_14"/>
+                <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_3_14" result="shape"/>
+              </filter>
+            </defs>
+          </svg>
         </button>
       </div>
 
