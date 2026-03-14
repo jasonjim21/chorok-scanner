@@ -78,40 +78,52 @@ export default function ResultsView({
         </div>
       )}
 
-      {/* 정보 바 */}
+      {/* 문장 목록 영역 — 그라디언트 배경 + 상단 라인 */}
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          marginBottom: 16,
+          marginLeft: -20,
+          marginRight: -20,
+          background: "linear-gradient(180deg, #050505 0%, #131313 100%)",
+          borderTop: `1px solid ${selectedCount > 0 ? "#1EFF00" : "#EEEEEE"}`,
+          transition: "border-top-color 0.2s ease",
+          minHeight: 644,
+          padding: "0 20px",
         }}
       >
-        <p style={{ color: "#00e600", fontSize: 13 }}>
-          {selectedCount > 0
-            ? `${selectedCount}개의 문장을 선택했어요`
-            : `${sentences.length}개의 문장을 찾았어요`}
-        </p>
-        <button
-          onClick={onSelectAll}
+        {/* 정보 바 */}
+        <div
           style={{
-            background: "none",
-            border: "none",
-            color: "#888",
-            fontSize: 13,
-            cursor: "pointer",
-            padding: "4px 8px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "16px 0",
           }}
         >
-          {allSelected ? "전체 해제" : "전체 선택"}
-        </button>
-      </div>
+          <p style={{ color: "#00e600", fontSize: 13 }}>
+            {selectedCount > 0
+              ? `${selectedCount}개의 문장을 선택했어요`
+              : `${sentences.length}개의 문장을 찾았어요`}
+          </p>
+          <button
+            onClick={onSelectAll}
+            style={{
+              background: "none",
+              border: "none",
+              color: "#888",
+              fontSize: 13,
+              cursor: "pointer",
+              padding: "4px 8px",
+            }}
+          >
+            {allSelected ? "전체 해제" : "전체 선택"}
+          </button>
+        </div>
 
-      {/* 문장 카드 리스트 */}
-      <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
-        {merged ? (
-          <SentenceCard
-            sentence={mergedText}
+        {/* 문장 카드 리스트 */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          {merged ? (
+            <SentenceCard
+              sentence={mergedText}
             index={0}
             selected={true}
             onToggle={() => {}}
@@ -126,8 +138,9 @@ export default function ResultsView({
               onToggle={onToggle}
             />
           ))
-        )}
-      </div>
+          )}
+        </div>
+      </div>{/* /그라디언트 배경 컨테이너 */}
 
       {/* 문장 하나로 엮기 토글 (2개 이상 선택 시) */}
       {showMergeToggle && (
