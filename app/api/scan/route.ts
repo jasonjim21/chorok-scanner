@@ -12,7 +12,7 @@ export async function POST(req: NextRequest) {
     }
 
     const model = genAI.getGenerativeModel({
-      model: "gemini-3-flash",
+      model: "gemini-2.5-flash",
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       generationConfig: {
         responseMimeType: "application/json",
