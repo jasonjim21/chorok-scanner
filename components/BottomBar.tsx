@@ -70,7 +70,6 @@ export default function BottomBar({ onCopy, onRecord }: BottomBarProps) {
                 </filter>
               </defs>
             </svg>
-            클립보드에 복사
           </button>
         </div>
 
@@ -121,7 +120,6 @@ export default function BottomBar({ onCopy, onRecord }: BottomBarProps) {
                 </filter>
               </defs>
             </svg>
-            노션으로 이동
           </button>
         </div>
       </div>

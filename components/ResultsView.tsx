@@ -35,44 +35,50 @@ export default function ResultsView({
         <div
           style={{
             position: "relative",
-            marginBottom: 20,
-            borderRadius: 8,
-            overflow: "hidden",
-            maxHeight: 100,
+            marginBottom: 28,
           }}
         >
-          <img
-            src={capturedImage}
-            alt="촬영한 페이지"
+          <div
             style={{
-              width: "100%",
-              objectFit: "cover",
-              objectPosition: "top",
-              opacity: 0.5,
-              display: "block",
+              borderRadius: 8,
+              overflow: "hidden",
+              maxHeight: 100,
             }}
-          />
+          >
+            <img
+              src={capturedImage}
+              alt="촬영한 페이지"
+              style={{
+                width: "100%",
+                objectFit: "cover",
+                objectPosition: "top",
+                opacity: 0.5,
+                display: "block",
+              }}
+            />
+          </div>
+          {/* 재촬영 버튼: 흰색 라인 12px 위 */}
           <button
             onClick={onRetake}
             style={{
               position: "absolute",
-              top: "50%",
+              bottom: -16,
               left: "50%",
-              transform: "translate(-50%, -50%)",
-              width: 40,
-              height: 40,
-              borderRadius: "50%",
-              background: "#e63946",
-              border: "none",
+              transform: "translateX(-50%)",
+              width: 63,
+              height: 32,
+              borderRadius: 34,
+              background: "#F1F1F1",
+              border: "1px solid #EEE",
+              boxShadow: "0 0 4px 0 rgba(0,0,0,0.45)",
               cursor: "pointer",
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
             }}
           >
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
-              <path d="M3 3v5h5" />
+            <svg width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M7.28836 11.9083C8.13757 12.6035 9.16667 13.0003 10.2646 13.0003C12.9286 13.0003 15.0979 10.7561 15.0979 8C15.0979 5.24393 12.9286 3.00239 10.2646 3.00239C7.60053 3.00239 5.52116 5.17003 5.44709 7.86042H7.96825L3.98413 12.9812L0 7.85768H2.53968C2.61376 3.51146 6.05027 0 10.2672 0C14.4841 0 18 3.58809 18 8C18 12.4119 14.5317 16 10.2672 16C8.52646 16 6.87566 15.4034 5.52645 14.3141L7.29101 11.9083H7.28836Z" fill="#FF393C"/>
             </svg>
           </button>
         </div>
@@ -99,7 +105,7 @@ export default function ResultsView({
             padding: "16px 0",
           }}
         >
-          <p style={{ color: "#00e600", fontSize: 13 }}>
+          <p style={{ color: selectedCount > 0 ? "#1EFF00" : "#909090", fontSize: 14, fontWeight: 400, lineHeight: "150%", letterSpacing: "-0.28px", margin: 0 }}>
             {selectedCount > 0
               ? `${selectedCount}개의 문장을 선택했어요`
               : `${sentences.length}개의 문장을 찾았어요`}
@@ -120,7 +126,7 @@ export default function ResultsView({
         </div>
 
         {/* 문장 카드 리스트 */}
-        <div style={{ display: "flex", flexDirection: "column", gap: 2 }}>
+        <div style={{ display: "flex", flexDirection: "column" }}>
           {merged ? (
             <SentenceCard
               sentence={mergedText}

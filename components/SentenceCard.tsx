@@ -12,48 +12,26 @@ export default function SentenceCard({ sentence, index, selected, onToggle }: Se
     <div
       onClick={() => onToggle(index)}
       style={{
-        position: "relative",
-        padding: "16px 20px 16px 52px",
-        background: selected ? "rgba(0, 230, 0, 0.08)" : "rgba(255,255,255,0.03)",
-        borderLeft: selected ? "3px solid #00e600" : "3px solid transparent",
-        borderRadius: 4,
-        transition: "all 0.2s ease",
+        display: "flex",
+        alignItems: "flex-start",
+        gap: 16,
+        paddingTop: 21,
+        paddingBottom: 21,
+        borderBottom: "1px solid rgba(255,255,255,0.08)",
         cursor: "pointer",
-        animation: `fadeSlideIn 0.4s ease ${index * 0.06}s both`,
         userSelect: "none",
+        animation: `fadeSlideIn 0.4s ease ${index * 0.06}s both`,
       }}
     >
       {/* Checkbox */}
-      <div
-        style={{
-          position: "absolute",
-          left: 18,
-          top: "50%",
-          transform: "translateY(-50%)",
-          width: 22,
-          height: 22,
-          borderRadius: 6,
-          border: selected ? "2px solid #00e600" : "2px solid rgba(255,255,255,0.15)",
-          background: selected ? "rgba(0, 230, 0, 0.2)" : "transparent",
-          transition: "all 0.2s ease",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: 0,
-        }}
-      >
-        {selected && (
-          <svg
-            width="12"
-            height="12"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#00e600"
-            strokeWidth="3"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polyline points="20 6 9 17 4 12" />
+      <div style={{ flexShrink: 0, marginTop: 2 }}>
+        {selected ? (
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6.33333 11L12.2083 5.125L11.0417 3.95833L6.33333 8.66667L3.95833 6.29167L2.79167 7.45833L6.33333 11ZM1.66667 15C1.20833 15 0.816111 14.8369 0.49 14.5108C0.163889 14.1847 0.000555556 13.7922 0 13.3333V1.66667C0 1.20833 0.163333 0.816111 0.49 0.49C0.816667 0.163889 1.20889 0.000555556 1.66667 0H13.3333C13.7917 0 14.1842 0.163333 14.5108 0.49C14.8375 0.816667 15.0006 1.20889 15 1.66667V13.3333C15 13.7917 14.8369 14.1842 14.5108 14.5108C14.1847 14.8375 13.7922 15.0006 13.3333 15H1.66667Z" fill="#1EFF00"/>
+          </svg>
+        ) : (
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.5" y="0.5" width="14" height="14" rx="1.5" stroke="#B4B4B4"/>
           </svg>
         )}
       </div>
@@ -61,11 +39,12 @@ export default function SentenceCard({ sentence, index, selected, onToggle }: Se
       <p
         style={{
           margin: 0,
-          fontSize: 15.5,
-          lineHeight: 1.85,
-          color: selected ? "#e8e4df" : "#c0bdb8",
+          fontSize: 16,
+          fontWeight: 400,
+          lineHeight: "130%",
+          letterSpacing: "-0.32px",
+          color: "#B4B4B4",
           wordBreak: "keep-all",
-          transition: "color 0.2s ease",
         }}
       >
         {sentence}
