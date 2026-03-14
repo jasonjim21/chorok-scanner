@@ -139,7 +139,9 @@ export default function Scanner() {
       style={{
         maxWidth: 480,
         margin: "0 auto",
+        height: appState === STATES.CAMERA ? "100svh" : "auto",
         minHeight: "100vh",
+        overflow: appState === STATES.CAMERA ? "hidden" : "visible",
         background: "#111111",
         position: "relative",
       }}
@@ -147,7 +149,7 @@ export default function Scanner() {
       {/* 헤더 */}
       <header
         style={{
-          padding: "40px 24px 16px",
+          padding: "40px 24px 36px",
           textAlign: "center",
           position: "relative",
           zIndex: 1,
@@ -208,26 +210,7 @@ export default function Scanner() {
         <BottomBar onCopy={handleCopy} onRecord={handleRecord} />
       )}
 
-      {appState === STATES.CAMERA && (
-        <footer
-          style={{
-            position: "fixed",
-            bottom: 0,
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "100%",
-            maxWidth: 480,
-            textAlign: "center",
-            paddingBottom: "max(24px, env(safe-area-inset-bottom))",
-            pointerEvents: "none",
-            zIndex: 1,
-          }}
-        >
-          <p style={{ color: "#676767", fontSize: 10, letterSpacing: "-0.02em" }}>ⓒ 2026. CHOROK All rights reserved.</p>
-        </footer>
-      )}
-
-      <Toast message={toast.message} visible={toast.visible} />
+<Toast message={toast.message} visible={toast.visible} />
     </div>
   );
 }

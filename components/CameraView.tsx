@@ -15,7 +15,22 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
 
   useEffect(() => {
     startCamera();
-    return () => stopCamera();
+
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === "visible") {
+        const isAlive = streamRef.current?.getTracks().some((t) => t.readyState === "live");
+        if (!isAlive) {
+          setCameraReady(false);
+          await startCamera();
+        }
+      }
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+
+    return () => {
+      stopCamera();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
   }, []);
 
   const startCamera = async () => {
@@ -269,8 +284,21 @@ export default function CameraView({ error, onImageCapture }: CameraViewProps) {
         </button>
       </div>
 
-      {/* 하단 여백 (copyright footer 공간 확보) */}
-      <div style={{ height: 48 }} />
+      {/* copyright — 갤러리 버튼 87px 아래 */}
+      <p
+        style={{
+          marginTop: 87,
+          color: "#676767",
+          textAlign: "center",
+          fontSize: 10,
+          fontWeight: 400,
+          lineHeight: "normal",
+          letterSpacing: "-0.2px",
+          paddingBottom: "max(16px, env(safe-area-inset-bottom))",
+        }}
+      >
+        ⓒ 2026. CHOROK All rights reserved.
+      </p>
     </div>
   );
 }
