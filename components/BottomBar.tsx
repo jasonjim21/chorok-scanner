@@ -3,9 +3,12 @@
 interface BottomBarProps {
   onCopy: () => void;
   onRecord: () => void;
+  showMergeToggle?: boolean;
+  merged?: boolean;
+  onMerge?: () => void;
 }
 
-export default function BottomBar({ onCopy, onRecord }: BottomBarProps) {
+export default function BottomBar({ onCopy, onRecord, showMergeToggle, merged, onMerge }: BottomBarProps) {
   return (
     <div
       style={{
@@ -15,15 +18,57 @@ export default function BottomBar({ onCopy, onRecord }: BottomBarProps) {
         transform: "translateX(-50%)",
         width: "100%",
         maxWidth: 480,
-        background:
-          "#050505",
-        paddingTop: 32,
+        background: "#050505",
+        paddingTop: 12,
         paddingLeft: 24,
         paddingRight: 16,
         paddingBottom: "max(16px, env(safe-area-inset-bottom))",
         zIndex: 100,
       }}
     >
+      {/* 문장 하나로 엮기 토글 */}
+      {showMergeToggle && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: 10,
+            marginBottom: 12,
+          }}
+        >
+          <button
+            onClick={onMerge}
+            aria-label="문장 하나로 엮기"
+            style={{
+              position: "relative",
+              width: 44,
+              height: 26,
+              borderRadius: 13,
+              background: merged ? "#00e600" : "#333",
+              border: "none",
+              cursor: "pointer",
+              transition: "background 0.2s ease",
+              padding: 0,
+              flexShrink: 0,
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: 3,
+                left: merged ? 21 : 3,
+                width: 20,
+                height: 20,
+                borderRadius: "50%",
+                background: "#fff",
+                transition: "left 0.2s ease",
+              }}
+            />
+          </button>
+          <p style={{ color: "#888", fontSize: 13, whiteSpace: "nowrap", margin: 0 }}>문장 하나로 엮기</p>
+        </div>
+      )}
+
       <div style={{ display: "flex", gap: 8 }}>
         {/* 클립보드 버튼 */}
         <div

@@ -9,7 +9,6 @@ interface ResultsViewProps {
   merged: boolean;
   onToggle: (index: number) => void;
   onSelectAll: () => void;
-  onMerge: () => void;
   onRetake: () => void;
 }
 
@@ -20,12 +19,10 @@ export default function ResultsView({
   merged,
   onToggle,
   onSelectAll,
-  onMerge,
   onRetake,
 }: ResultsViewProps) {
   const selectedCount = selected.filter(Boolean).length;
   const allSelected = selected.length > 0 && selected.every(Boolean);
-  const showMergeToggle = selectedCount >= 2;
   const mergedText = sentences.filter((_, i) => selected[i]).join(" ");
 
   return (
@@ -147,52 +144,6 @@ export default function ResultsView({
         </div>
       </div>{/* /그라디언트 배경 컨테이너 */}
 
-      {/* 문장 하나로 엮기 토글 (2개 이상 선택 시) */}
-      {showMergeToggle && (
-        <div
-          style={{
-            position: "fixed",
-            bottom: 92,
-            left: "50%",
-            transform: "translateX(-50%)",
-            display: "flex",
-            alignItems: "center",
-            gap: 10,
-            zIndex: 99,
-          }}
-        >
-          <button
-            onClick={onMerge}
-            aria-label="문장 하나로 엮기"
-            style={{
-              position: "relative",
-              width: 44,
-              height: 26,
-              borderRadius: 13,
-              background: merged ? "#00e600" : "#333",
-              border: "none",
-              cursor: "pointer",
-              transition: "background 0.2s ease",
-              padding: 0,
-              flexShrink: 0,
-            }}
-          >
-            <div
-              style={{
-                position: "absolute",
-                top: 3,
-                left: merged ? 21 : 3,
-                width: 20,
-                height: 20,
-                borderRadius: "50%",
-                background: "#fff",
-                transition: "left 0.2s ease",
-              }}
-            />
-          </button>
-          <p style={{ color: "#888", fontSize: 13, whiteSpace: "nowrap" }}>문장 하나로 엮기</p>
-        </div>
-      )}
     </div>
   );
 }

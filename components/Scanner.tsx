@@ -200,14 +200,19 @@ export default function Scanner() {
             merged={merged}
             onToggle={handleToggle}
             onSelectAll={handleSelectAll}
-            onMerge={handleMerge}
             onRetake={handleReset}
           />
         )}
       </main>
 
       {appState === STATES.RESULTS && (
-        <BottomBar onCopy={handleCopy} onRecord={handleRecord} />
+        <BottomBar
+          onCopy={handleCopy}
+          onRecord={handleRecord}
+          showMergeToggle={selectedCount >= 2}
+          merged={merged}
+          onMerge={handleMerge}
+        />
       )}
 
 <Toast message={toast.message} visible={toast.visible} />
