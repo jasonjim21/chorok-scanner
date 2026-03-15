@@ -58,7 +58,7 @@ export default function ResultsView({
             onClick={onRetake}
             style={{
               position: "absolute",
-              top: "50%",
+              top: "calc(50% + 15px)",
               left: "50%",
               transform: "translate(-50%, -50%)",
               width: 63,
